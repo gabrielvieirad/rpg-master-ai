@@ -1,0 +1,17 @@
+# Evita enviar o ambiente virtual
+venv/
+
+# Evita arquivos temporários do Python
+__pycache__/
+
+# Evita enviar bancos de dados SQLite (caso use)
+*.sqlite3
+
+# Evita expor variáveis de ambiente sensíveis
+.env
+
+# Arquivos de logs
+*.log
+
+# Configurações do VSCode (caso use)
+.vscode/
