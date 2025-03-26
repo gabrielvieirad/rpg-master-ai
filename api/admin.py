@@ -1,6 +1,6 @@
-from django.contrib import admin  # type: ignore
+from django.contrib import admin 
 from django.contrib.auth.admin import UserAdmin
-from .models import SistemaRPG, Personagem, Campanha, CustomUser  # Removendo Mestre
+from .models import SistemaRPG, Personagem, Campanha, CustomUser  
 
 @admin.register(SistemaRPG)
 class SistemaRPGAdmin(admin.ModelAdmin):

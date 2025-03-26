@@ -24,7 +24,7 @@ def verificar_limite_requisicoes(usuario):
     """Verifica se o usurio atingiu o limite diário de requisições"""
     uso, criado = UsoIA.objects.get_or_create(usuario=usuario)
 
-    # Se o último reset foi há mais de 24hrs, resetar o contador
+    # Se o último reset foi há mais de 24hrs, resetar o reset
     if (now() - uso.ultimo_reset).days >= 1:
         uso.resetar_contador()
     
@@ -33,7 +33,7 @@ def verificar_limite_requisicoes(usuario):
     return True
 
 def incrementar_contador_requisicoes(usuario):
-    # Incrementa o contador de requisições do usuário
+    # Adiciona o contador de requisições
     uso, _ = UsoIA.objects.get_or_create(usuario=usuario)
     uso.quantidade_requisicoes += 1
     uso.save()
@@ -43,15 +43,15 @@ def gerar_historia_ia(usuario, campanha_id=None, tom="épico", genero="fantasia 
 
     prompt = f"Crie um enredo para uma campanha solo de RPG. Gênero: {genero}. Tom: {tom}. Sistema de RPG: {sistema_rpg}."
 
-    # 🔍 Verificar se já existe uma história semelhante no cache
+    # Verifica se já existe uma história semelhante no cache
     historias_existentes = CacheRespostaIA.objects.filter(usuario=usuario)
     for historia in historias_existentes:
         similaridade = difflib.SequenceMatcher(None, historia.prompt, prompt).ratio()
         if similaridade > 0.85:  # Se for mais de 85% semelhante, retorna do cache
-            CacheLog.objects.create(usuario=usuario, cache_usado=historia)  # 🔥 Registra o uso do cache
+            CacheLog.objects.create(usuario=usuario, cache_usado=historia)  # Registra o uso do cache
             return historia.resposta
 
-    # 💡 Se não encontrou, gerar nova história com a IA
+    # Se não encontrou, gerar nova história com a IA
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[
@@ -64,7 +64,7 @@ def gerar_historia_ia(usuario, campanha_id=None, tom="épico", genero="fantasia 
 
     historia_gerada = response.choices[0].message.content.strip()
 
-    # 📌 Salvar no cache e histórico
+    # Salvar no cache e histórico
     cache_resposta = CacheRespostaIA.objects.create(usuario=usuario, campanha_id=campanha_id, prompt=prompt, resposta=historia_gerada)
 
     if campanha_id:

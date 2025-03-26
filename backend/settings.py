@@ -61,20 +61,20 @@ REST_FRAMEWORK = {
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 ],
     'DEFAULT_PERMISSION_CLASSES': [
-    #'rest_framework.permissions.IsAuthenticated', # Usar em produção, requer autentificação
+    #'rest_framework.permissions.IsAuthenticated', # Requer autentificação, usar somente no produto final
     'rest_framework.permissions.AllowAny', # Uso temporário, acesso sem autentificação
 ],
 
     'DEFAULT_FILTER_BACKENDS': [
     'django_filters.rest_framework.DjangoFilterBackend'
 ],
-    'DEFAULT_PAGINATION_CLASS': 'api.pagination.CustomPagination',  # 🔥 Define a paginação global
+    'DEFAULT_PAGINATION_CLASS': 'api.pagination.CustomPagination',  # Define a paginação global
     'PAGE_SIZE': 10,  # Define o tamanho padrão das páginas
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),  # Tempo de expiração do access token
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # Tempo de expiração do refresh token
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),  # Tempo do access token
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # Tempo do refresh token
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
     

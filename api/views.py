@@ -28,7 +28,7 @@ from api.utils import registrar_log, registrar_atividade
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        data["access"] = str(self.get_token(self.user).access_token)  # 🔥 Forçando o retorno do Access Token
+        data["access"] = str(self.get_token(self.user).access_token) 
         return data
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -46,7 +46,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class CustomPagination(PageNumberPagination):
     page_size = 10 # Defina 10 itens por página
     page_size_query_param = 'page_size'
-    max_page_size = 50 # Defina um limite máximo para evitar requisições gigantes
+    max_page_size = 50 # Defina um limite máximo para evitar requisições gigantescas
 
 class PersonagemViewSet(viewsets.ModelViewSet):
     queryset = Personagem.objects.all()

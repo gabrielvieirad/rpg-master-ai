@@ -4,7 +4,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 
 class Command(BaseCommand):
-    help = "Limpa logs de cache mais antigos que 30 dias."
+    help = "Limpa logs de cache mais antigos (30 dias)."
 
     def handle(self, *args, **kwargs):
         limite_data = now() - timedelta(days=30)

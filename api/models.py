@@ -17,7 +17,7 @@ class CustomUser(AbstractUser):
     def is_jogador(self):
         return self.role == 'jogador'
 
-# Model de Sistemas de RPG 
+# Modelo de Sistemas de RPG 
 class SistemaRPG(models.Model):
     nome = models.CharField(max_length=255, unique=True)
     descricao = models.TextField(blank=True, null=True)
@@ -25,7 +25,7 @@ class SistemaRPG(models.Model):
     def __str__(self):
         return self.nome
 
-# Model de Personagem
+# Modelo de Personagem
 class Personagem(models.Model):
     nome = models.CharField(max_length=255)
     sistema = models.ForeignKey("SistemaRPG", on_delete=models.CASCADE, related_name="personagens")
@@ -35,7 +35,7 @@ class Personagem(models.Model):
     def __str__(self):
         return f"{self.nome} ({self.sistema.nome})"
 
-# Model de Campanha
+# Modelo de Campanha
 class Campanha(models.Model):
     titulo = models.CharField(max_length=150)
     descricao = models.TextField()
@@ -45,7 +45,7 @@ class Campanha(models.Model):
     def __str__(self):
         return self.titulo
 
-# Model de Cache de Respostas da IA 
+# Modelo de Cache de Respostas da IA 
 class CacheRespostaIA(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     campanha = models.ForeignKey("Campanha", on_delete=models.CASCADE, null=True, blank=True)
@@ -59,7 +59,7 @@ class CacheRespostaIA(models.Model):
     def __str__(self):
         return f"Cache - {self.usuario.username} - {self.campanha} - {self.criado_em}"
 
-# Model de Histórico de Interação da IA
+# Modelo de Histórico de Interação da IA
 class HistoricoIA(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     campanha = models.ForeignKey("Campanha", on_delete=models.CASCADE, null=True, blank=True)

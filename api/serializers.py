@@ -4,7 +4,7 @@ from .models import Personagem, SistemaRPG, Campanha, HistoriaGerada, LogAPI, Lo
 class PersonagemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Personagem
-        fields = '__all__'  # ou liste os campos explicitamente
+        fields = '__all__'  # lista os campos
 
 class SistemaRPGSerializer(serializers.ModelSerializer):
     class Meta:
