@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "django_filters",
     "core",
+    "rpg",
 ]
 from datetime import timedelta
 
